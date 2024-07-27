@@ -7,9 +7,9 @@
 
 set -e
 
-cd build \
-&&
-cmake .. \
+cmake \
+    -S . \
+    -B build \
     -G Ninja \
     -DCMAKE_C_FLAGS=-m32 \
     -DCMAKE_CXX_FLAGS=-m32 \
@@ -20,11 +20,11 @@ cmake .. \
     -DBUILD_ABI_CHECK_TOOL=$build_tools \
 &&
 cmake \
-    --build . \
+    --build build \
     --config $config \
     --parallel $(nproc)
 
-cd Output/*/Tools
+cd build/Output/*/Tools
 echo "Fetching ref artifacts"
 url=$(curl "https://nightly.link/$NIGHTLY_REPO/workflows/build/master" | grep -oP "(?<=\")https://nightly.link/$NIGHTLY_REPO/workflows/build/master/open.mp-linux-x86-dynssl.*\.zip(?=\")")
 curl -L $url -o master.zip

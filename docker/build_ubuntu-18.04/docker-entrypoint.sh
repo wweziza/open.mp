@@ -5,9 +5,9 @@
 [ -z $BUILD_TOOLS ] && build_tools=0 || build_tools="$BUILD_TOOLS"
 [ -z $TARGET_BUILD_ARCH ] && target_build_arch=x86 || target_build_arch="$TARGET_BUILD_ARCH"
 
-cd build \
-&&
-cmake .. \
+cmake \
+    -S . \
+    -B build \
     -G Ninja \
     -DTARGET_BUILD_ARCH=$target_build_arch \
     -DCMAKE_BUILD_TYPE=$config \
@@ -17,6 +17,6 @@ cmake .. \
     -DBUILD_ABI_CHECK_TOOL=$build_tools \
 &&
 cmake \
-    --build . \
+    --build build \
     --config $config \
     --parallel $(nproc)

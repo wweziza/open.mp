@@ -302,9 +302,3 @@ conanbuildinfo*.*
 conanfile.txt
 conaninfo.txt
 graph_info.json
-cmake_install.cmake
-*-config-version.cmake
-*-config.cmake
-*-targets.cmake
-CTestTestfile.cmake
-*Config.cmake
